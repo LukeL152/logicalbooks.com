@@ -134,6 +134,7 @@ body.services-steel {
 .footer-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 0; }
 @media (min-width: 780px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
 .footer-brand { display: flex; align-items: center; gap: .6rem; font-weight: 700; }
+.footer-brand .logo { width: 22px; height: 22px; }
 .footer-links { list-style: none; padding: 0; margin: 0; }
 .footer-links li { margin: .35rem 0; }
 .footer-bottom { border-top: 1px solid var(--stroke); padding: .75rem 0 1.5rem; color: var(--muted); }
