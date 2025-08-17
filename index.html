@@ -39,7 +39,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="brand" aria-label="Logical Books home">
+      <a href="#/" class="brand" aria-label="Logical Books home">
         <img src="assets/img/favicon.svg" alt="Logical Books logo" class="logo" />
         <span class="brand-text">Logical Books</span>
       </a>
@@ -48,83 +48,18 @@
       </button>
       <nav id="site-nav" class="site-nav" aria-label="Primary">
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="faq.html">FAQs</a></li>
-          <li><a href="intake.html">Intake</a></li>
-          <li><a class="btn btn-primary" href="contact.html">Contact</a></li>
+          <li><a href="#/">Home</a></li>
+          <li><a href="#/about">About</a></li>
+          <li><a href="#/services">Services</a></li>
+          <li><a href="#/faq">FAQs</a></li>
+          <li><a href="#/intake">Intake</a></li>
+          <li><a class="btn btn-primary" href="#/contact">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main id="main">
-    <section class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <h1>Bookkeeping for peace of mind</h1>
-          <p>Clean, timely books and decision-ready insights—so you can focus on growth.</p>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="contact.html#contact-form">Book a free consultation</a>
-            <a class="btn btn-secondary" href="services.html">Explore services</a>
-          </div>
-          <ul class="trust-points">
-            <li>Accurate monthly closes</li>
-            <li>Decision-ready insights</li>
-            <li>Year‑end ready records</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="features section">
-      <div class="container grid-3">
-        <article class="card">
-          <h3>Peace of Mind</h3>
-          <p>Clean, timely books with reliable monthly closes.</p>
-        </article>
-        <article class="card">
-          <h3>Clear, Friendly Insights</h3>
-          <p>Inclusive, easy‑to‑understand guidance and next steps.</p>
-        </article>
-        <article class="card">
-          <h3>Confident Decisions</h3>
-          <p>Trends and simple KPIs to guide your moves.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="services-preview section">
-      <div class="container">
-        <h2>What we do</h2>
-        <div class="grid-3">
-          <article class="card service">
-          <h3>Bookkeeping</h3>
-          <p>Monthly categorization, reconciliations, and audit‑ready records — powered by our in‑house Logical Books platform.</p>
-          </article>
-          <article class="card service">
-            <h3>Financial Insights</h3>
-            <p>Clarity on cash flow and trends with plain‑English guidance for next steps.</p>
-          </article>
-          <article class="card service">
-            <h3>Financial Reporting</h3>
-            <p>Clear P&L, Balance Sheet, and Cash Flow with performance insights.</p>
-          </article>
-        </div>
-        <div class="center mt">
-          <a class="btn btn-outline" href="services.html">See all services</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta-banner">
-      <div class="container cta-banner-inner">
-        <p>Ready for calm, clear books and better decisions?</p>
-        <a class="btn btn-primary" href="contact.html#contact-form">Get in touch</a>
-      </div>
-    </section>
-  </main>
+  <main id="main"></main>
 
   <footer class="site-footer">
     <div class="container footer-grid">
@@ -141,11 +76,11 @@
       <div>
         <h4>Quick links</h4>
         <ul class="footer-links">
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="faq.html">FAQs</a></li>
-          <li><a href="intake.html">Intake</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#/about">About</a></li>
+          <li><a href="#/services">Services</a></li>
+          <li><a href="#/faq">FAQs</a></li>
+          <li><a href="#/intake">Intake</a></li>
+          <li><a href="#/contact">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -155,5 +90,33 @@
   </footer>
 
   <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/router.js" defer></script>
+  <script src="assets/js/livereload.js" defer></script>
+  <!-- Hidden Netlify forms to register form endpoints at build time -->
+  <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="tel" name="phone" />
+    <input type="text" name="service" />
+    <textarea name="message"></textarea>
+  </form>
+  <form name="intake" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="tel" name="phone" />
+    <input type="text" name="company" />
+    <input type="url" name="website" />
+    <input type="text" name="industry" />
+    <input type="text" name="stage" />
+    <input type="text" name="team" />
+    <input type="text" name="services" />
+    <input type="text" name="software" />
+    <input type="text" name="transactions" />
+    <textarea name="challenges"></textarea>
+    <textarea name="goals"></textarea>
+    <input type="text" name="budget" />
+    <input type="text" name="timeline" />
+    <input type="text" name="referrer" />
+  </form>
 </body>
 </html>

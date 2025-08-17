@@ -9,17 +9,17 @@
     });
   }
 
-  // Active link based on path
-  const here = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('#site-nav a').forEach(a => {
-    const href = a.getAttribute('href');
-    if (!href) return;
-    const file = href.split('/').pop();
-    if (file === here) a.classList.add('active');
-  });
+  // SPA: Active link based on hash route
+  function setActive() {
+    const hash = location.hash || '#/';
+    document.querySelectorAll('#site-nav a').forEach(a => a.classList.remove('active'));
+    const link = document.querySelector(`#site-nav a[href='${hash}']`) || document.querySelector(`#site-nav a[href='#/']`);
+    if (link) link.classList.add('active');
+  }
+  window.addEventListener('hashchange', setActive);
+  setActive();
 
   // Year in footer
   const year = document.getElementById('year');
   if (year) year.textContent = String(new Date().getFullYear());
 })();
-

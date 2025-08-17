@@ -1,0 +1,55 @@
+<section class="page-hero">
+  <div class="container">
+    <h1>Contact Us</h1>
+    <p>Share your goals and bookkeeping needs. We’ll reply within one business day with next steps.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container two-col">
+    <div>
+      <h2>Get in touch</h2>
+      <p><strong>Phone:</strong> <a href="tel:+13368583549">(336) 858‑3549</a><br>
+      <strong>Email:</strong> <a href="mailto:info@logicalbooks.com">info@logicalbooks.com</a></p>
+      <p>Prefer to write it out? Use the form and we’ll get back to you.</p>
+    </div>
+    <div>
+      <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="card" aria-labelledby="contact-form-title">
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="sr-only" aria-hidden="true">
+          <label>Don’t fill this out if you’re human: <input name="bot-field" type="text" tabindex="-1" autocomplete="off" /></label>
+        </p>
+        <h2 id="contact-form-title">Free Consultation</h2>
+        <div class="form-grid">
+          <label>
+            <span>Full name</span>
+            <input name="name" type="text" required autocomplete="name" />
+          </label>
+          <label>
+            <span>Email</span>
+            <input name="email" type="email" required autocomplete="email" />
+          </label>
+          <label>
+            <span>Phone</span>
+            <input name="phone" type="tel" autocomplete="tel" />
+          </label>
+          <label>
+            <span>Service interest</span>
+            <select name="service">
+              <option>Bookkeeping</option>
+              <option>Financial Insights</option>
+              <option>Financial Reporting</option>
+              <option>Advisory</option>
+            </select>
+          </label>
+          <label class="full">
+            <span>Message</span>
+            <textarea name="message" rows="5" placeholder="Tell us about your business and goals" required></textarea>
+          </label>
+        </div>
+        <button class="btn btn-primary" type="submit">Send request</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>

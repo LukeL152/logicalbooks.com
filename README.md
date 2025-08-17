@@ -24,12 +24,18 @@ Default recipient is `info@logicalbooks.com`. Update in both files if needed.
 If you prefer to capture submissions without relying on the visitor’s mail client, replace these handlers with your provider (e.g., Formspree, Netlify Forms) and set a proper `action` + `method`. Netlify Forms also works without JS by adding `netlify` attributes on the `<form>`.
 
 ## Run locally
-- Option 1: Double-click `index.html` to open in your browser.
-- Option 2: Serve the folder (recommended for testing relative links):
-  - Python: `python3 -m http.server 8080`
-  - Node (if installed): `npx serve .`
+This is a Single-Page Application (SPA). To load route templates, you must serve files over HTTP.
 
-Then visit `http://localhost:8080`.
+Options:
+- Python: `python3 -m http.server 8080` then open `http://localhost:8080`
+- Node (built-in dev server with SPA fallback + live reload): `node dev-server.js 8080`
+- Netlify CLI: `npx netlify-cli dev`
+
+Convenience via npm scripts:
+- `npm run dev` → Python simple server (no live reload)
+- `npm run dev:node` → Node dev server (SPA fallback + live reload)
+
+Opening `index.html` directly from the file system (file://) will prevent templates from loading.
 
 ## Deploy
 Any static host works. Popular free options:

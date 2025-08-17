@@ -37,6 +37,31 @@ a:hover { color: var(--gold-600); }
 .center { text-align: center; }
 .two-col { display: grid; grid-template-columns: 1fr; gap: 2rem; }
 
+/* SPA content fade */
+main#main { transition: opacity .2s ease; }
+main#main.is-loading { opacity: .25; }
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.skeleton-line {
+  height: 14px;
+  border-radius: 8px;
+  margin: .6rem 0;
+  background: linear-gradient(90deg, rgba(220,225,235,.6) 25%, rgba(240,243,248,.9) 37%, rgba(220,225,235,.6) 63%);
+  background-size: 800px 100%;
+  animation: shimmer 1.2s infinite linear;
+}
+.skeleton-card {
+  height: 120px;
+  border-radius: .9rem;
+  background: linear-gradient(90deg, rgba(220,225,235,.6) 25%, rgba(240,243,248,.9) 37%, rgba(220,225,235,.6) 63%);
+  background-size: 800px 100%;
+  animation: shimmer 1.2s infinite linear;
+}
+
 @media (min-width: 900px) {
   .two-col { grid-template-columns: 1fr 1fr; }
 }
