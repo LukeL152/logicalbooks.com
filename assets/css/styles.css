@@ -1,6 +1,6 @@
 /* Base theme: Light, Human, Black & Gold accents */
 :root {
-  --bg: #edf1f6; /* lighter, friendly cool gray */
+  --bg: #f5f5f7; /* neutral light gray */
   --panel: #ffffff; /* cards and header */
   --gold: #d6b25e; /* warm metallic base */
   --gold-600: #b9902f; /* deeper gold for hover */
