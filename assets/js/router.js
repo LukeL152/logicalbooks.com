@@ -24,8 +24,11 @@
   async function load(route) {
     const file = routes[route] || routes['/'];
     try {
+      // Simple fade out
+      main.classList.add('is-loading');
       const res = await fetch(`assets/templates/${file}`, { cache: 'no-cache' });
       const html = await res.text();
+      // Inject content
       main.innerHTML = html;
       // Update document title
       document.title = titles[route] || titles['/'];
@@ -34,10 +37,18 @@
       // Attach form handlers if available
       if (typeof window.attachContactFormHandler === 'function') window.attachContactFormHandler();
       if (typeof window.attachIntakeFormHandler === 'function') window.attachIntakeFormHandler();
+      // Focus first heading for accessibility
+      const heading = main.querySelector('h1, h2');
+      if (heading) {
+        heading.setAttribute('tabindex', '-1');
+        heading.focus({ preventScroll: true });
+      }
       // Dispatch a hook for any other initializers
       document.dispatchEvent(new CustomEvent('spa:navigated', { detail: { route } }));
       // Scroll to top on navigation
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Simple fade in
+      setTimeout(() => main.classList.remove('is-loading'), 60);
     } catch (e) {
       console.error('Failed to load route', route, e);
     }
@@ -59,5 +70,13 @@
   window.addEventListener('hashchange', () => load(parseRoute()));
   // Initial load
   load(parseRoute());
-})();
 
+  // Prefetch other routes to improve perceived performance
+  window.addEventListener('load', () => {
+    Object.entries(routes).forEach(([r, f]) => {
+      // Skip current route
+      if (r === parseRoute()) return;
+      fetch(`assets/templates/${f}`).catch(() => {});
+    });
+  });
+})();

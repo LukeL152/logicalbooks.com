@@ -37,6 +37,10 @@ a:hover { color: var(--gold-600); }
 .center { text-align: center; }
 .two-col { display: grid; grid-template-columns: 1fr; gap: 2rem; }
 
+/* SPA content fade */
+main#main { transition: opacity .2s ease; }
+main#main.is-loading { opacity: .25; }
+
 @media (min-width: 900px) {
   .two-col { grid-template-columns: 1fr 1fr; }
 }
