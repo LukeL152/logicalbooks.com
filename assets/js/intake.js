@@ -1,7 +1,9 @@
 // Intake form handler: composes a mailto: with structured details
-(function () {
+window.attachIntakeFormHandler = function attachIntakeFormHandler() {
   const form = document.getElementById('intake-form');
   if (!form) return;
+  if (form.__attached) return;
+  form.__attached = true;
   const status = form.querySelector('.form-status');
   const SUBJECT_TAG = '[Logical Books Intake]';
 
@@ -76,4 +78,7 @@
     if (status) status.textContent = 'Thanks! Your email client should open. If not, email info@logicalbooks.com.';
     form.reset();
   });
-})();
+};
+
+// Initialize on initial load
+window.attachIntakeFormHandler();

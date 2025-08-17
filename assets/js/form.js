@@ -1,7 +1,9 @@
 // Lightweight client-side handler that opens a mailto: with the form data
-(function () {
+window.attachContactFormHandler = function attachContactFormHandler() {
   const form = document.getElementById('contact-form');
   if (!form) return;
+  if (form.__attached) return; // avoid duplicate listeners
+  form.__attached = true;
   const status = form.querySelector('.form-status');
   const SUBJECT_TAG = '[Logical Books Contact]';
 
@@ -31,9 +33,11 @@
     const body = encodeURIComponent(bodyLines.join('\n'));
     const mail = `mailto:info@logicalbooks.com?subject=${subject}&body=${body}`;
 
-    // Attempt to open the user's email client
     window.location.href = mail;
     if (status) status.textContent = 'Thanks! Your email client should open. If not, email info@logicalbooks.com.';
     form.reset();
   });
-})();
+};
+
+// Initialize on initial page load
+window.attachContactFormHandler();
