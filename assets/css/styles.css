@@ -1,11 +1,11 @@
 /* Base theme: Light, Human, Black & Gold accents */
 :root {
-  --bg: #1f2329; /* dark gray body */
+  --bg: #edf1f6; /* lighter, friendly cool gray */
   --panel: #ffffff; /* cards and header */
   --gold: #d6b25e; /* warm metallic base */
   --gold-600: #b9902f; /* deeper gold for hover */
   --gold-700: #a27f29; /* shadow tone */
-  --text: #e9eaee; /* light text on dark body */
+  --text: #14161a; /* dark text on light body */
   --muted: #5b6270; /* secondary text */
   --stroke: #e6e9f2; /* light borders */
   --accent: #111111; /* black accents for emphasis */
