@@ -1,11 +1,11 @@
 /* Base theme: Light, Human, Black & Gold accents */
 :root {
-  --bg: #f3f6fa; /* cooler, friendly light gray */
+  --bg: #f5f5f7; /* neutral light gray */
   --panel: #ffffff; /* cards and header */
   --gold: #d6b25e; /* warm metallic base */
   --gold-600: #b9902f; /* deeper gold for hover */
   --gold-700: #a27f29; /* shadow tone */
-  --text: #14161a; /* near-black text */
+  --text: #14161a; /* dark text on light body */
   --muted: #5b6270; /* secondary text */
   --stroke: #e6e9f2; /* light borders */
   --accent: #111111; /* black accents for emphasis */
@@ -28,8 +28,8 @@ body {
 }
 
 img { max-width: 100%; display: inline-block; }
-a { color: var(--accent); text-decoration: none; }
-a:hover { color: #000; }
+a { color: var(--gold); text-decoration: none; }
+a:hover { color: var(--gold-600); }
 
 .container { width: min(1100px, 92%); margin: 0 auto; }
 .section { padding: 4rem 0; }
@@ -97,7 +97,7 @@ a:hover { color: #000; }
 /* Cards and grids */
 .grid-3 { display: grid; grid-template-columns: 1fr; gap: 1rem; }
 @media (min-width: 720px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
-.card { background: var(--panel); border: 1px solid var(--stroke); border-radius: .9rem; padding: 1.1rem 1.3rem; box-shadow: var(--shadow); }
+.card { background: var(--panel); border: 1px solid var(--stroke); border-radius: .9rem; padding: 1.1rem 1.3rem; box-shadow: var(--shadow); color: #14161a; }
 /* Slightly darker boxes on Services page */
 .services-list .card { background: var(--services-card-bg); border-color: var(--services-card-border); }
 
@@ -134,6 +134,7 @@ body.services-steel {
 .footer-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 0; }
 @media (min-width: 780px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
 .footer-brand { display: flex; align-items: center; gap: .6rem; font-weight: 700; }
+.footer-brand .logo { width: 22px; height: 22px; }
 .footer-links { list-style: none; padding: 0; margin: 0; }
 .footer-links li { margin: .35rem 0; }
 .footer-bottom { border-top: 1px solid var(--stroke); padding: .75rem 0 1.5rem; color: var(--muted); }
