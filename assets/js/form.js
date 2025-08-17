@@ -35,8 +35,8 @@ window.attachContactFormHandler = function attachContactFormHandler() {
       body: payload.toString()
     }).then((resp) => {
       if (resp.ok) {
-        if (status) status.textContent = 'Thanks! We’ll be in touch soon.';
         form.reset();
+        location.hash = '#/thanks?form=contact';
       } else {
         throw new Error('Network response not ok');
       }

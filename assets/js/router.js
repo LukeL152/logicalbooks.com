@@ -6,7 +6,8 @@
     '/services': 'services.html',
     '/faq': 'faq.html',
     '/contact': 'contact.html',
-    '/intake': 'intake.html'
+    '/intake': 'intake.html',
+    '/thanks': 'thanks.html'
   };
 
   const titles = {
@@ -15,7 +16,8 @@
     '/services': 'Services | Logical Books',
     '/faq': 'FAQs | Logical Books',
     '/contact': 'Contact | Logical Books',
-    '/intake': 'Client Intake | Logical Books'
+    '/intake': 'Client Intake | Logical Books',
+    '/thanks': 'Thank You | Logical Books'
   };
 
   const main = document.getElementById('main');

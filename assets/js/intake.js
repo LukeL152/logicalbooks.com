@@ -57,8 +57,8 @@ window.attachIntakeFormHandler = function attachIntakeFormHandler() {
       body: payload.toString()
     }).then((resp) => {
       if (resp.ok) {
-        if (status) status.textContent = 'Thanks! We’ll be in touch soon.';
         form.reset();
+        location.hash = '#/thanks?form=intake';
       } else {
         throw new Error('Network response not ok');
       }
