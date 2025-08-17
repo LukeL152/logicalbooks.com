@@ -27,6 +27,9 @@
       // Start loading state and show a lightweight skeleton
       main.classList.add('is-loading');
       main.innerHTML = skeletonFor(route);
+      if (location.protocol === 'file:') {
+        throw new Error('Local file protocol detected. Please serve over http://localhost to load templates.');
+      }
       const res = await fetch(`assets/templates/${file}`, { cache: 'no-cache' });
       const html = await res.text();
       // Inject content
@@ -52,6 +55,15 @@
       setTimeout(() => main.classList.remove('is-loading'), 60);
     } catch (e) {
       console.error('Failed to load route', route, e);
+      main.innerHTML = `
+        <section class="section">
+          <div class="container">
+            <h2>Unable to load content</h2>
+            <p>To view the SPA locally, please run a local server (for example: <code>python3 -m http.server 8080</code>) and open <code>http://localhost:8080/</code>. Directly opening <code>index.html</code> from the file system blocks template loading.</p>
+            <p>If this is on production and you still see this, please check network requests to <code>assets/templates/*</code>.</p>
+          </div>
+        </section>`;
+      main.classList.remove('is-loading');
     }
   }
 

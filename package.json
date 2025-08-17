@@ -1,0 +1,11 @@
+{
+  "name": "logicalbooks-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Logical Books website (static + SPA mode)",
+  "scripts": {
+    "dev": "python3 -m http.server 8080",
+    "dev:node": "node dev-server.js 8080"
+  }
+}
+

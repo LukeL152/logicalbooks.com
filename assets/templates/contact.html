@@ -14,7 +14,11 @@
       <p>Prefer to write it out? Use the form and we’ll get back to you.</p>
     </div>
     <div>
-      <form id="contact-form" class="card" aria-labelledby="contact-form-title">
+      <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="card" aria-labelledby="contact-form-title">
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="sr-only" aria-hidden="true">
+          <label>Don’t fill this out if you’re human: <input name="bot-field" type="text" tabindex="-1" autocomplete="off" /></label>
+        </p>
         <h2 id="contact-form-title">Free Consultation</h2>
         <div class="form-grid">
           <label>
@@ -49,4 +53,3 @@
     </div>
   </div>
 </section>
-

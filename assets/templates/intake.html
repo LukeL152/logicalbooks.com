@@ -17,7 +17,11 @@
       </ul>
     </div>
     <div>
-      <form id="intake-form" class="card" aria-labelledby="intake-form-title" novalidate>
+      <form id="intake-form" name="intake" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="card" aria-labelledby="intake-form-title" novalidate>
+        <input type="hidden" name="form-name" value="intake" />
+        <p class="sr-only" aria-hidden="true">
+          <label>Don’t fill this out if you’re human: <input name="bot-field" type="text" tabindex="-1" autocomplete="off" /></label>
+        </p>
         <h2 id="intake-form-title">Tell us about your business</h2>
         <div class="form-grid">
           <label>
@@ -153,4 +157,3 @@
     </div>
   </div>
 </section>
-

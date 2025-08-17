@@ -21,21 +21,28 @@ window.attachContactFormHandler = function attachContactFormHandler() {
       return;
     }
 
-    const subject = encodeURIComponent(`${SUBJECT_TAG}${name ? ' — ' + name : ''}`);
-    const bodyLines = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      phone ? `Phone: ${phone}` : '',
-      service ? `Service: ${service}` : '',
-      '',
-      message
-    ].filter(Boolean);
-    const body = encodeURIComponent(bodyLines.join('\n'));
-    const mail = `mailto:info@logicalbooks.com?subject=${subject}&body=${body}`;
+    // Submit to Netlify Forms via fetch (AJAX)
+    const payload = new URLSearchParams();
+    payload.set('form-name', 'contact');
+    for (const [k, v] of data.entries()) {
+      payload.append(k, String(v));
+    }
 
-    window.location.href = mail;
-    if (status) status.textContent = 'Thanks! Your email client should open. If not, email info@logicalbooks.com.';
-    form.reset();
+    if (status) status.textContent = 'Sending…';
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: payload.toString()
+    }).then((resp) => {
+      if (resp.ok) {
+        if (status) status.textContent = 'Thanks! We’ll be in touch soon.';
+        form.reset();
+      } else {
+        throw new Error('Network response not ok');
+      }
+    }).catch(() => {
+      if (status) status.textContent = 'Sorry, something went wrong. Please email info@logicalbooks.com.';
+    });
   });
 };
 
