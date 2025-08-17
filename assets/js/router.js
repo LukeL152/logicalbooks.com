@@ -24,8 +24,9 @@
   async function load(route) {
     const file = routes[route] || routes['/'];
     try {
-      // Simple fade out
+      // Start loading state and show a lightweight skeleton
       main.classList.add('is-loading');
+      main.innerHTML = skeletonFor(route);
       const res = await fetch(`assets/templates/${file}`, { cache: 'no-cache' });
       const html = await res.text();
       // Inject content
@@ -79,4 +80,37 @@
       fetch(`assets/templates/${f}`).catch(() => {});
     });
   });
+
+  // Very small skeleton generator for perceived performance
+  function skeletonFor(route) {
+    const cards = `
+      <div class="grid-3">
+        <div class="card skeleton-card"></div>
+        <div class="card skeleton-card"></div>
+        <div class="card skeleton-card"></div>
+      </div>`;
+    const lines = `
+      <div class="skeleton-line" style="width: 60%"></div>
+      <div class="skeleton-line" style="width: 90%"></div>
+      <div class="skeleton-line" style="width: 80%"></div>`;
+    const hero = `
+      <section class="hero">
+        <div class="container">
+          <div class="hero-content">
+            <div class="skeleton-line" style="height: 2.2rem; width: 55%"></div>
+            <div class="skeleton-line" style="width: 70%"></div>
+            <div class="skeleton-line" style="width: 40%"></div>
+          </div>
+        </div>
+      </section>`;
+    const section = `
+      <section class="section">
+        <div class="container">
+          ${lines}
+          <div style="height: 12px"></div>
+          ${cards}
+        </div>
+      </section>`;
+    return hero + section;
+  }
 })();
