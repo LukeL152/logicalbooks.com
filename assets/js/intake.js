@@ -53,12 +53,16 @@ window.attachIntakeFormHandler = function attachIntakeFormHandler() {
     if (status) status.textContent = 'Sending…';
     fetch('/', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' },
       body: payload.toString()
     }).then((resp) => {
       if (resp.ok) {
         form.reset();
         location.hash = '#/thanks?form=intake';
+      } else if ((resp.status === 501 || resp.status === 405) && (location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+        // Local Python server returns 501/405 for POST. Simulate success in dev.
+        form.reset();
+        location.hash = '#/thanks?form=intake&dev=1';
       } else {
         throw new Error('Network response not ok');
       }
