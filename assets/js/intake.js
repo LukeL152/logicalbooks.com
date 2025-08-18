@@ -1,7 +1,9 @@
 // Intake form handler: composes a mailto: with structured details
-(function () {
+window.attachIntakeFormHandler = function attachIntakeFormHandler() {
   const form = document.getElementById('intake-form');
   if (!form) return;
+  if (form.__attached) return;
+  form.__attached = true;
   const status = form.querySelector('.form-status');
   const SUBJECT_TAG = '[Logical Books Intake]';
 
@@ -39,41 +41,32 @@
       return;
     }
 
-    const subjectDetails = [name || '', company ? `@ ${company}` : ''].filter(Boolean).join(' ');
-    const subject = encodeURIComponent(`${SUBJECT_TAG}${subjectDetails ? ' — ' + subjectDetails : ''}`);
-    const lines = [
-      '— Contact —',
-      `Name: ${name}`,
-      `Email: ${email}`,
-      phone ? `Phone: ${phone}` : '',
-      company ? `Company: ${company}` : '',
-      website ? `Website: ${website}` : '',
-      '',
-      '— Business —',
-      industry ? `Industry: ${industry}` : '',
-      stage ? `Stage: ${stage}` : '',
-      team ? `Team size: ${team}` : '',
-      services.length ? `Services: ${services.join(', ')}` : '',
-      software ? `Software: ${software}` : '',
-      transactions ? `Monthly tx volume: ${transactions}` : '',
-      '',
-      '— Needs —',
-      `Challenges:\n${challenges}`,
-      '',
-      `Goals:\n${goals}`,
-      '',
-      '— Scope —',
-      budget ? `Budget: ${budget}` : '',
-      timeline ? `Timeline: ${timeline}` : '',
-      referrer ? `Heard about us: ${referrer}` : '',
-    ].filter(Boolean);
+    // Submit to Netlify Forms via fetch (AJAX)
+    const payload = new URLSearchParams();
+    payload.set('form-name', 'intake');
+    const fields = {
+      name, email, phone, company, website, industry, stage, team,
+      services: services.join(', '), software, transactions, challenges, goals, budget, timeline, referrer
+    };
+    Object.entries(fields).forEach(([k, v]) => payload.append(k, v || ''));
 
-    const body = encodeURIComponent(lines.join('\n'));
-    const mail = `mailto:info@logicalbooks.com?subject=${subject}&body=${body}`;
-
-    // Open the user's email client
-    window.location.href = mail;
-    if (status) status.textContent = 'Thanks! Your email client should open. If not, email info@logicalbooks.com.';
-    form.reset();
+    if (status) status.textContent = 'Sending…';
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: payload.toString()
+    }).then((resp) => {
+      if (resp.ok) {
+        form.reset();
+        location.hash = '#/thanks?form=intake';
+      } else {
+        throw new Error('Network response not ok');
+      }
+    }).catch(() => {
+      if (status) status.textContent = 'Sorry, something went wrong. Please email info@logicalbooks.com.';
+    });
   });
-})();
+};
+
+// Initialize on initial load
+window.attachIntakeFormHandler();
