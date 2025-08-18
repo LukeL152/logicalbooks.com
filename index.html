@@ -11,7 +11,9 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://logicalbooks.com/" />
   <meta property="og:site_name" content="Logical Books" />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:image" content="https://logicalbooks.com/assets/img/social-default.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://logicalbooks.com/assets/img/social-default.svg" />
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/css/styles.css?v=20250818" />
   <script type="application/ld+json">
@@ -34,6 +36,16 @@
   <meta name="author" content="Logical Books" />
   <meta name="keywords" content="bookkeeping, small business accounting, financial insights, financial statements, bookkeeping services" />
   
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZPK49HELG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} // GA4 minimal loader
+    gtag('js', new Date());
+    // Disable automatic page_view; SPA sends page_view on route changes
+    gtag('config', 'G-4ZPK49HELG', { send_page_view: false });
+  </script>
+  
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -51,6 +63,8 @@
           <li><a href="#/">Home</a></li>
           <li><a href="#/about">About</a></li>
           <li><a href="#/services">Services</a></li>
+          <li><a href="#/testimonials">Testimonials</a></li>
+          <li><a href="#/insights">Insights</a></li>
           <li><a href="#/faq">FAQs</a></li>
           <li><a href="#/intake">Intake</a></li>
           <li><a class="btn btn-primary" href="#/contact">Contact</a></li>
@@ -78,9 +92,13 @@
         <ul class="footer-links">
           <li><a href="#/about">About</a></li>
           <li><a href="#/services">Services</a></li>
+          <li><a href="#/testimonials">Testimonials</a></li>
+          <li><a href="#/insights">Insights</a></li>
           <li><a href="#/faq">FAQs</a></li>
           <li><a href="#/intake">Intake</a></li>
           <li><a href="#/contact">Contact</a></li>
+          <li><a href="#/privacy">Privacy</a></li>
+          <li><a href="#/terms">Terms</a></li>
         </ul>
       </div>
     </div>

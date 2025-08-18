@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://logicalbooks.com/</loc></url>
+  <url><loc>https://logicalbooks.com/about</loc></url>
+  <url><loc>https://logicalbooks.com/services</loc></url>
+  <url><loc>https://logicalbooks.com/faq</loc></url>
+  <url><loc>https://logicalbooks.com/contact</loc></url>
+  <url><loc>https://logicalbooks.com/intake</loc></url>
+  <url><loc>https://logicalbooks.com/privacy</loc></url>
+  <url><loc>https://logicalbooks.com/terms</loc></url>
+  <url><loc>https://logicalbooks.com/testimonials</loc></url>
+  <url><loc>https://logicalbooks.com/insights</loc></url>
+  <url><loc>https://logicalbooks.com/insights/cash-vs-accrual</loc></url>
+  <url><loc>https://logicalbooks.com/insights/when-to-hire-a-bookkeeper</loc></url>
+  <url><loc>https://logicalbooks.com/insights/cash-runway-forecast</loc></url>
+  <url><loc>https://logicalbooks.com/insights/read-your-p-and-l</loc></url>
+  <url><loc>https://logicalbooks.com/insights/pay-yourself-correctly</loc></url>
 </urlset>

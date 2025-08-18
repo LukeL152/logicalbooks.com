@@ -86,12 +86,12 @@ main#main.is-loading { opacity: .25; }
 .site-nav a { color: var(--text); padding: .4rem .5rem; border-radius: .33rem; }
 .site-nav a.active { color: #111; background: linear-gradient(180deg, #f2d47a, #d6b25e); }
 
-.btn { display: inline-block; border: 0; color: #111; background: linear-gradient(180deg, #f2d47a, #d6b25e 70%, #b9902f); padding: .7rem 1rem; border-radius: .6rem; font-weight: 650; box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 6px 16px rgba(0,0,0,.08); }
-.btn:hover { filter: brightness(1.02); }
-.btn-secondary { background: transparent; color: var(--gold); }
-.btn-secondary:hover { background: rgba(0,0,0,.06); }
-.btn-outline { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
-.btn-outline:hover { background: rgba(0,0,0,.05); }
+.btn,
+.btn-secondary,
+.btn-outline { display: inline-block; border: 0; color: #111; background: linear-gradient(180deg, #f2d47a, #d6b25e 70%, #b9902f); padding: .7rem 1rem; border-radius: .6rem; font-weight: 650; box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 6px 16px rgba(0,0,0,.08); }
+.btn:hover,
+.btn-secondary:hover,
+.btn-outline:hover { filter: brightness(1.02); }
 
 .nav-toggle { display: inline-flex; flex-direction: column; gap: 4px; background: transparent; border: 0; cursor: pointer; padding: .5rem; color: var(--text); }
 .nav-toggle .bar { width: 24px; height: 2px; background: currentColor; display: block; }
@@ -193,3 +193,16 @@ input:focus, select:focus, textarea:focus { outline: 2px solid rgba(212,175,55,.
 .step h3 { margin: .25rem 0 .25rem; font-size: 1.05rem; }
 .floating-cta { position: fixed; right: 1rem; bottom: 1rem; z-index: 60; }
 @media (max-width: 640px) { .floating-cta { left: 1rem; right: 1rem; bottom: .75rem; } .floating-cta .btn { width: 100%; text-align: center; } }
+
+/* Article polish */
+.meta { color: var(--muted); font-size: .95rem; margin-top: .25rem; }
+.post-hero-figure { margin: 1rem 0 2rem; }
+.post-hero-figure img { width: 100%; height: auto; border-radius: 8px; display: block; }
+
+/* Insights list */
+.post-list .post-item { padding: 1rem 0; border-top: 1px solid var(--stroke); }
+.post-list .post-item:first-child { border-top: 0; }
+.post-list .btn { margin-top: .25rem; }
+
+/* Related links */
+.related-list { padding-left: 1.2rem; }

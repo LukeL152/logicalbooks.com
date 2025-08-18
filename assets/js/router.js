@@ -7,7 +7,16 @@
     '/faq': 'faq.html',
     '/contact': 'contact.html',
     '/intake': 'intake.html',
-    '/thanks': 'thanks.html'
+    '/thanks': 'thanks.html',
+    '/privacy': 'privacy.html',
+    '/terms': 'terms.html',
+    '/testimonials': 'testimonials.html',
+    '/insights': 'insights.html',
+    '/insights/cash-vs-accrual': 'post-cash-vs-accrual.html',
+    '/insights/when-to-hire-a-bookkeeper': 'post-when-to-hire.html',
+    '/insights/cash-runway-forecast': 'post-cash-runway.html',
+    '/insights/read-your-p-and-l': 'post-read-p-and-l.html',
+    '/insights/pay-yourself-correctly': 'post-pay-yourself.html'
   };
 
   const titles = {
@@ -17,7 +26,54 @@
     '/faq': 'FAQs | Logical Books',
     '/contact': 'Contact | Logical Books',
     '/intake': 'Client Intake | Logical Books',
-    '/thanks': 'Thank You | Logical Books'
+    '/thanks': 'Thank You | Logical Books',
+    '/privacy': 'Privacy Policy | Logical Books',
+    '/terms': 'Terms of Service | Logical Books',
+    '/testimonials': 'Testimonials | Logical Books',
+    '/insights': 'Insights | Logical Books',
+    '/insights/cash-vs-accrual': 'Cash vs. Accrual Accounting | Insights | Logical Books',
+    '/insights/when-to-hire-a-bookkeeper': 'When to Hire a Bookkeeper | Insights | Logical Books',
+    '/insights/cash-runway-forecast': 'Build a Cash Runway Forecast | Insights | Logical Books',
+    '/insights/read-your-p-and-l': 'How to Read Your P&L and Balance Sheet | Insights | Logical Books',
+    '/insights/pay-yourself-correctly': 'Pay Yourself the Right Way | Insights | Logical Books'
+  };
+
+  const descriptions = {
+    '/': 'Logical Books helps small businesses with accurate bookkeeping, decision-ready financial insights, and year‑end ready records.',
+    '/about': 'Learn about Logical Books, our approach to bookkeeping, and how we support small business owners.',
+    '/services': 'Monthly bookkeeping, catch-up projects, and decision-ready financial reporting tailored to your business.',
+    '/faq': 'Common questions about pricing, onboarding, software, working with your CPA, and catch‑up projects.',
+    '/contact': 'Get in touch with Logical Books for a free consultation or to ask a question.',
+    '/intake': 'Share details about your business so we can recommend the right bookkeeping plan.',
+    '/thanks': 'Thanks for reaching out to Logical Books. We will get back to you shortly.',
+    '/privacy': 'Read Logical Books’ privacy policy covering data collection, use, and your choices.',
+    '/terms': 'Read the terms of service for using Logical Books’ website and services.',
+    '/testimonials': 'See what clients say about Logical Books and the impact of our bookkeeping.',
+    '/insights': 'Practical bookkeeping tips and small business finance guides from Logical Books.',
+    '/insights/cash-vs-accrual': 'Understand the difference between cash and accrual accounting and which is right for your business.',
+    '/insights/when-to-hire-a-bookkeeper': 'Key signs it’s time to bring on a professional bookkeeper.',
+    '/insights/cash-runway-forecast': 'Four steps to estimate your months of cash and extend runway.',
+    '/insights/read-your-p-and-l': 'A founder’s guide to reading your P&L and balance sheet with confidence.',
+    '/insights/pay-yourself-correctly': 'Owner draw vs salary vs distributions—keep compensation clean and compliant.'
+  };
+
+  const images = {
+    '/': 'assets/img/social-default.svg',
+    '/about': 'assets/img/social-default.svg',
+    '/services': 'assets/img/social-default.svg',
+    '/faq': 'assets/img/insights-faq.svg',
+    '/contact': 'assets/img/social-default.svg',
+    '/intake': 'assets/img/social-default.svg',
+    '/thanks': 'assets/img/social-default.svg',
+    '/privacy': 'assets/img/social-default.svg',
+    '/terms': 'assets/img/social-default.svg',
+    '/testimonials': 'assets/img/insights-testimonials.svg',
+    '/insights': 'assets/img/insights-default.svg',
+    '/insights/cash-vs-accrual': 'assets/img/insights-cash-vs-accrual.svg',
+    '/insights/when-to-hire-a-bookkeeper': 'assets/img/insights-when-to-hire.svg',
+    '/insights/cash-runway-forecast': 'assets/img/insights-cash-runway.svg',
+    '/insights/read-your-p-and-l': 'assets/img/insights-read-p-and-l.svg',
+    '/insights/pay-yourself-correctly': 'assets/img/insights-pay-yourself.svg'
   };
 
   const main = document.getElementById('main');
@@ -38,6 +94,16 @@
       main.innerHTML = html;
       // Update document title
       document.title = titles[route] || titles['/'];
+      // Update meta description for SEO
+      setMetaDescription(descriptions[route] || descriptions['/']);
+      // Update social meta (Open Graph / Twitter)
+      setSocialMeta({
+        title: titles[route] || titles['/'],
+        description: descriptions[route] || descriptions['/'],
+        image: toAbsolute(images[route] || images['/'])
+      });
+      // Send GA4 page_view for SPA navigation
+      sendPageView(route);
       // Highlight nav link
       highlight(route);
       // Attach form handlers if available
@@ -126,5 +192,56 @@
         </div>
       </section>`;
     return hero + section;
+  }
+
+  function setMetaDescription(text) {
+    if (!text) return;
+    let tag = document.querySelector('meta[name="description"]');
+    if (!tag) {
+      tag = document.createElement('meta');
+      tag.setAttribute('name', 'description');
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute('content', text);
+  }
+
+  function setSocialMeta({ title, description, image }) {
+    setOrCreate('meta[property="og:title"]', 'property', 'og:title', 'content', title);
+    setOrCreate('meta[property="og:description"]', 'property', 'og:description', 'content', description);
+    setOrCreate('meta[property="og:image"]', 'property', 'og:image', 'content', image);
+    setOrCreate('meta[name="twitter:title"]', 'name', 'twitter:title', 'content', title);
+    setOrCreate('meta[name="twitter:description"]', 'name', 'twitter:description', 'content', description);
+    setOrCreate('meta[name="twitter:image"]', 'name', 'twitter:image', 'content', image);
+  }
+
+  function setOrCreate(selector, keyName, keyValue, valueName, value) {
+    let tag = document.querySelector(selector);
+    if (!tag) {
+      tag = document.createElement('meta');
+      tag.setAttribute(keyName, keyValue);
+      document.head.appendChild(tag);
+    }
+    if (value) tag.setAttribute(valueName, value);
+  }
+
+  function toAbsolute(url) {
+    try {
+      return new URL(url, location.origin).toString();
+    } catch (_) {
+      return url;
+    }
+  }
+
+  function sendPageView(route) {
+    const title = titles[route] || titles['/'];
+    const prettyPath = route; // Use clean path (no hash)
+    const locationUrl = new URL(prettyPath.replace(/^\/?/, '/'), location.origin).toString();
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'page_view', {
+        page_title: title,
+        page_location: locationUrl,
+        page_path: prettyPath
+      });
+    }
   }
 })();

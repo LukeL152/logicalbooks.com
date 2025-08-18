@@ -35,10 +35,22 @@ window.attachContactFormHandler = function attachContactFormHandler() {
       body: payload.toString()
     }).then((resp) => {
       if (resp.ok) {
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'generate_lead', {
+            form_name: 'contact',
+            method: 'Netlify Forms'
+          });
+        }
         form.reset();
         location.hash = '#/thanks?form=contact';
       } else if ((resp.status === 501 || resp.status === 405) && (location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
         // Local Python server returns 501/405 for POST. Simulate success in dev.
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'generate_lead', {
+            form_name: 'contact',
+            method: 'dev-simulated'
+          });
+        }
         form.reset();
         location.hash = '#/thanks?form=contact&dev=1';
       } else {
