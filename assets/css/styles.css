@@ -105,6 +105,15 @@ main#main.is-loading { opacity: .25; }
   .site-nav ul { flex-direction: column; align-items: flex-start; gap: 0; }
   .site-nav li { width: 100%; }
   .site-nav a, .site-nav .btn { display: block; width: 100%; padding: 1rem 1.25rem; border-radius: 0; border: 0; box-shadow: none; }
+  /* Ensure dark text on white mobile menu */
+  .site-header .site-nav a { color: #14161a; }
+  .site-header .site-nav .btn { color: #111; }
+}
+
+/* Safety: if the nav ever opens on desktop, keep contrast high */
+@media (min-width: 821px) {
+  .site-nav.open { background: #000; }
+  .site-header .site-nav.open a { color: #fff; }
 }
 
 /* Hero */
