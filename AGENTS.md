@@ -31,6 +31,20 @@ This repo contains a small static site implemented as a hash‑based SPA. It ser
 - Use hash routing to avoid server‑side rewrites on generic static hosts.
 - Minimal JS and no build step to ease maintenance.
 
+## Brand Palette
+- Primary background: `#003654` (deep navy)
+- Panel/background: `#A8DADC` (light teal)
+- Primary accent: `#F5BD02` (gold; buttons, highlights)
+- Supporting accent: `#E76F51` (coral; subtle shadows/accents)
+- Border/secondary: `#3A668C` (cool blue; borders, focus rings)
+- Neutral dark: `#303941` (subtle button borders)
+
+Guidelines:
+- Buttons: Gold base with a very subtle vertical gradient; coral‑tinted hover shadow for warmth. Text on buttons uses navy for contrast.
+- Nav active state: Gold background with navy text.
+- Panels: Light teal cards with blue borders on a deep navy body.
+- Accessibility: Focus rings use `#3A668C`; body text remains light on dark for contrast.
+
 ## Recommended Next Steps
 1) Launch Readiness
 - Content polish: Finalize copy, services list, pricing signals, and FAQs.
@@ -70,4 +84,3 @@ Questions for the Owner
 - Which analytics and form provider do you prefer?
 - Do you need a blog or resources section at launch?
 - Any geographic focus for `areaServed` in JSON‑LD beyond US?
-
