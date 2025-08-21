@@ -46,7 +46,8 @@ window.attachIntakeFormHandler = function attachIntakeFormHandler() {
     payload.set('form-name', 'intake');
     const fields = {
       name, email, phone, company, website, industry, stage, team,
-      services: services.join(', '), software, transactions, challenges, goals, budget, timeline, referrer
+      services: services.join(', '), software, transactions, challenges, goals, budget, timeline, referrer,
+      consent: consent ? 'yes' : 'no'
     };
     Object.entries(fields).forEach(([k, v]) => payload.append(k, v || ''));
 

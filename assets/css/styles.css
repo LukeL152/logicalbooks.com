@@ -191,12 +191,16 @@ body.services-steel {
 
 /* Forms */
 label span { display: inline-block; margin-bottom: .35rem; color: var(--muted); font-size: .95rem; }
+/* Ensure readable labels on light panel cards */
+.card label span { color: #003654; }
 input, select, textarea { width: 100%; background: #ffffff; color: #000; border: 1px solid var(--stroke); border-radius: .6rem; padding: .65rem .75rem; }
 input:focus, select:focus, textarea:focus { outline: 2px solid rgba(212,175,55,.35); border-color: var(--gold); }
 .form-grid { display: grid; grid-template-columns: 1fr; gap: .9rem; }
 .form-grid .full { grid-column: 1 / -1; }
 @media (min-width: 720px) { .form-grid { grid-template-columns: 1fr 1fr; } }
 .form-status { color: var(--muted); margin-top: .5rem; min-height: 1.2rem; }
+/* Higher contrast status text inside cards */
+.card .form-status { color: #003654; }
 
 /* Ensure placeholders are readable on white inputs */
 input::placeholder, textarea::placeholder { color: #303941; opacity: .8; }

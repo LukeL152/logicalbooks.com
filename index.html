@@ -108,6 +108,9 @@
   </footer>
 
   <script src="assets/js/main.js?v=20250818" defer></script>
+  <!-- Load form handlers before router so hooks are available -->
+  <script src="assets/js/form.js?v=20250818" defer></script>
+  <script src="assets/js/intake.js?v=20250818" defer></script>
   <script src="assets/js/router.js?v=20250818" defer></script>
   <script src="assets/js/livereload.js" defer></script>
   <!-- Hidden Netlify forms to register form endpoints at build time -->
@@ -135,6 +138,7 @@
     <input type="text" name="budget" />
     <input type="text" name="timeline" />
     <input type="text" name="referrer" />
+    <input type="text" name="consent" />
   </form>
 </body>
 </html>
