@@ -4,11 +4,11 @@ compatibility_date = "2024-12-01"
 
 [vars]
 # CORS: include your production origin and localhost for dev
-ALLOWED_ORIGINS = "https://logicalbooks.com, http://localhost:8080"
+ALLOWED_ORIGINS = "https://logicalbooks.io, https://www.logicalbooks.io, http://localhost:8080"
 
 # Optional MailChannels (email notifications)
-# FROM_EMAIL = "no-reply@logicalbooks.com"
-# DEST_EMAIL = "info@logicalbooks.com"
+# FROM_EMAIL = "lucas@logicalbooks.io"
+# DEST_EMAIL = "lucas@logicalbooks.io"
 
 # Zoho CRM integration
 ZOHO_DC = "com"            # change if your Zoho account is in a different DC
