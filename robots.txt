@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://logicalbooks.com/sitemap.xml
+Sitemap: https://logicalbooks.io/sitemap.xml
