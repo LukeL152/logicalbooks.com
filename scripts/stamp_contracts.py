@@ -81,7 +81,7 @@ def main():
 
             # Contact line (right)
             c.setFont('Helvetica', 9.5)
-            contact = 'logicalbooks.com  •  (336) 858‑3549  •  info@logicalbooks.com'
+            contact = 'logicalbooks.io  •  (336) 858‑3549  •  info@logicalbooks.com'
             text_w = c.stringWidth(contact, 'Helvetica', 9.5)
             c.drawString(width - x_pad - text_w, top - 6, contact)
 
@@ -120,4 +120,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

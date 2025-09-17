@@ -98,7 +98,7 @@ def brand_docx(docx_in: Path, docx_out: Path, logo_png: Path):
         # Right cell: contact line, right aligned
         pr = right.paragraphs[0]
         pr.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        rr = pr.add_run('logicalbooks.com  •  (336) 858‑3549  •  info@logicalbooks.com')
+        rr = pr.add_run('logicalbooks.io  •  (336) 858‑3549  •  info@logicalbooks.com')
         rr.font.size = Pt(9)
 
         # Footer: Page X aligned right

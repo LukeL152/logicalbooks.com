@@ -4,7 +4,7 @@ compatibility_date = "2024-12-01"
 
 [vars]
 # Comma-separated list of allowed origins for CORS
-# Example: "https://logicalbooks.com, http://localhost:8080"
+# Example: "https://logicalbooks.io, http://localhost:8080"
 ALLOWED_ORIGINS = "http://localhost:8080"
 
 # Optional bearer token, if you want the frontend to send Authorization: Bearer <token>
@@ -12,9 +12,9 @@ ALLOWED_ORIGINS = "http://localhost:8080"
 
 # Optional MailChannels settings for email notifications
 # Set FROM_EMAIL to an address at a domain you control
-# e.g., no-reply@logicalbooks.com and configure your DNS/DKIM for best delivery
+# e.g., no-reply@logicalbooks.io and configure your DNS/DKIM for best delivery
 # DEST_EMAIL is where to receive notifications
-# FROM_EMAIL = "no-reply@logicalbooks.com"
+# FROM_EMAIL = "no-reply@logicalbooks.io"
 # DEST_EMAIL = "info@logicalbooks.com"
 
 # Zoho CRM integration (optional but recommended if you want CRM records)
