@@ -102,6 +102,9 @@
         description: descriptions[route] || descriptions['/'],
         image: toAbsolute(images[route] || images['/'])
       });
+      // Set robots: hide Intake from indexing
+      const robots = route === '/intake' ? 'noindex, nofollow' : 'index, follow';
+      setRobots(robots);
       // Send GA4 page_view for SPA navigation
       sendPageView(route);
       // Highlight nav link
@@ -212,6 +215,17 @@
     setOrCreate('meta[name="twitter:title"]', 'name', 'twitter:title', 'content', title);
     setOrCreate('meta[name="twitter:description"]', 'name', 'twitter:description', 'content', description);
     setOrCreate('meta[name="twitter:image"]', 'name', 'twitter:image', 'content', image);
+  }
+
+  function setRobots(content) {
+    const sel = 'meta[name="robots"]';
+    let tag = document.querySelector(sel);
+    if (!tag) {
+      tag = document.createElement('meta');
+      tag.setAttribute('name', 'robots');
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute('content', content || 'index, follow');
   }
 
   function setOrCreate(selector, keyName, keyValue, valueName, value) {
