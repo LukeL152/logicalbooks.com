@@ -1,0 +1,28 @@
+name = "logical-books-forms"
+main = "worker.js"
+compatibility_date = "2024-12-01"
+
+[vars]
+# CORS: include your production origin and localhost for dev
+ALLOWED_ORIGINS = "https://logicalbooks.com, http://localhost:8080"
+
+# Optional MailChannels (email notifications)
+# FROM_EMAIL = "no-reply@logicalbooks.com"
+# DEST_EMAIL = "info@logicalbooks.com"
+
+# Zoho CRM integration
+ZOHO_DC = "com"            # change if your Zoho account is in a different DC
+ZOHO_CREATE_NOTE = "true"  # attach a Note with full submission details
+
+# Optional lead owner/status
+# ZOHO_OWNER_ID = "<zoho-user-id>"
+# ZOHO_LEAD_STATUS = "New - Not Contacted"
+
+# Optional: require Authorization: Bearer <token> from frontend
+# AUTH_TOKEN = "<set-as-secret>"
+
+# KV logging is optional. If you want it later,
+# use the array-of-tables syntax below (uncomment and set your ID):
+# [[kv_namespaces]]
+# binding = "SUBMISSIONS"
+# id = "<kv-namespace-id>"

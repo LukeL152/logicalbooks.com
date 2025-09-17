@@ -14,14 +14,12 @@ A simple, multi-page static website for a bookkeeping firm. It uses a black-and-
 - Copy: Edit the content in each HTML file (plain text, no build step).
 
 ## Forms (contact + intake)
-Both `contact.html` and `intake.html` use lightweight client‑side handlers that open the visitor’s email client with a prefilled message via `mailto:`:
+Client‑side handlers live in `assets/js/form.js` and `assets/js/intake.js`.
 
-- Contact: `assets/js/form.js`
-- Intake: `assets/js/intake.js`
+- Default provider: Netlify Forms (no backend to maintain).
+- Optional: Custom endpoint (e.g., Cloudflare Worker) via `assets/js/config.js`.
 
-Default recipient is `info@logicalbooks.com`. Update in both files if needed.
-
-If you prefer to capture submissions without relying on the visitor’s mail client, replace these handlers with your provider (e.g., Formspree, Netlify Forms) and set a proper `action` + `method`. Netlify Forms also works without JS by adding `netlify` attributes on the `<form>`.
+Switch providers by editing `assets/js/config.js` and see setup guides in `docs/forms.md`.
 
 ## Run locally
 This is a Single-Page Application (SPA). To load route templates, you must serve files over HTTP.

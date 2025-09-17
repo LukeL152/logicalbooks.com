@@ -1,0 +1,41 @@
+name = "logical-books-forms"
+main = "worker.js"
+compatibility_date = "2024-12-01"
+
+[vars]
+# Comma-separated list of allowed origins for CORS
+# Example: "https://logicalbooks.com, http://localhost:8080"
+ALLOWED_ORIGINS = "http://localhost:8080"
+
+# Optional bearer token, if you want the frontend to send Authorization: Bearer <token>
+# AUTH_TOKEN = "change-me"
+
+# Optional MailChannels settings for email notifications
+# Set FROM_EMAIL to an address at a domain you control
+# e.g., no-reply@logicalbooks.com and configure your DNS/DKIM for best delivery
+# DEST_EMAIL is where to receive notifications
+# FROM_EMAIL = "no-reply@logicalbooks.com"
+# DEST_EMAIL = "info@logicalbooks.com"
+
+# Zoho CRM integration (optional but recommended if you want CRM records)
+# Your Zoho data center: com (US), eu, in, com.au, com.cn
+ZOHO_DC = "com"
+ZOHO_CLIENT_ID = "<zoho-client-id>"
+ZOHO_CLIENT_SECRET = "<zoho-client-secret>"
+ZOHO_REFRESH_TOKEN = "<zoho-refresh-token>"
+
+# Optional: assign a specific owner to created leads
+# ZOHO_OWNER_ID = "<zoho-user-id>"
+
+# Optional: default status for new leads (must match your CRM picklist)
+# ZOHO_LEAD_STATUS = "New - Not Contacted"
+
+# Optional: also create a Note with full submission details
+ZOHO_CREATE_NOTE = "true"
+
+[kv_namespaces]
+# Optional KV for storing submissions (viewable in dashboard or via API)
+# Bind name must match the code (SUBMISSIONS)
+bindings = [
+  { binding = "SUBMISSIONS", id = "<kv-namespace-id>" }
+]

@@ -1,4 +1,4 @@
-// Intake form handler: composes a mailto: with structured details
+// Intake form handler: supports Netlify Forms and a custom endpoint
 window.attachIntakeFormHandler = function attachIntakeFormHandler() {
   const form = document.getElementById('intake-form');
   if (!form) return;
@@ -6,6 +6,7 @@ window.attachIntakeFormHandler = function attachIntakeFormHandler() {
   form.__attached = true;
   const status = form.querySelector('.form-status');
   const SUBJECT_TAG = '[Logical Books Intake]';
+  const cfg = (window.APP_CONFIG && window.APP_CONFIG.FORMS) || {};
 
   function getValues(name) {
     return Array.from(form.querySelectorAll(`[name="${name}"]`))
@@ -35,49 +36,101 @@ window.attachIntakeFormHandler = function attachIntakeFormHandler() {
     const timeline = String(data.get('timeline') || '').trim();
     const referrer = String(data.get('referrer') || '').trim();
     const consent = data.get('consent');
+    const botField = (data.get('bot-field') || '').toString().trim();
 
     if (!name || !email || !challenges || !goals || !consent) {
       if (status) status.textContent = 'Please complete required fields.';
       return;
     }
 
-    // Submit to Netlify Forms via fetch (AJAX)
-    const payload = new URLSearchParams();
-    payload.set('form-name', 'intake');
-    const fields = {
-      name, email, phone, company, website, industry, stage, team,
-      services: services.join(', '), software, transactions, challenges, goals, budget, timeline, referrer,
-      consent: consent ? 'yes' : 'no'
-    };
-    Object.entries(fields).forEach(([k, v]) => payload.append(k, v || ''));
+    // Honeypot: if filled, silently succeed
+    if (botField) {
+      form.reset();
+      location.hash = '#/thanks?form=intake&ok=1';
+      return;
+    }
 
+    const provider = (cfg.provider || 'netlify').toLowerCase();
     if (status) status.textContent = 'Sending…';
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' },
-      body: payload.toString()
-    }).then((resp) => {
-      if (resp.ok) {
-        if (typeof window.gtag === 'function') {
-          window.gtag('event', 'generate_lead', {
-            form_name: 'intake',
-            method: 'Netlify Forms'
-          });
+
+    if (provider === 'netlify') {
+      // Submit to Netlify Forms via fetch (AJAX)
+      const payload = new URLSearchParams();
+      payload.set('form-name', 'intake');
+      const fields = {
+        name, email, phone, company, website, industry, stage, team,
+        services: services.join(', '), software, transactions, challenges, goals, budget, timeline, referrer,
+        consent: consent ? 'yes' : 'no'
+      };
+      Object.entries(fields).forEach(([k, v]) => payload.append(k, v || ''));
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' },
+        body: payload.toString()
+      }).then((resp) => {
+        if (resp.ok) {
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'generate_lead', { form_name: 'intake', method: 'Netlify Forms' });
+          }
+          form.reset();
+          location.hash = '#/thanks?form=intake';
+        } else if ((resp.status === 501 || resp.status === 405) && (location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+          // Local Python server returns 501/405 for POST. Simulate success in dev.
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'generate_lead', { form_name: 'intake', method: 'dev-simulated' });
+          }
+          form.reset();
+          location.hash = '#/thanks?form=intake&dev=1';
+        } else {
+          throw new Error('Network response not ok');
         }
-        form.reset();
-        location.hash = '#/thanks?form=intake';
-      } else if ((resp.status === 501 || resp.status === 405) && (location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
-        // Local Python server returns 501/405 for POST. Simulate success in dev.
+      }).catch(() => {
+        if (status) status.textContent = 'Sorry, something went wrong. Please email info@logicalbooks.com.';
+      });
+      return;
+    }
+
+    // Custom provider (JSON POST)
+    const endpoint = (cfg.FORM_ENDPOINT || '').replace(/\/$/, '');
+    if (!endpoint) {
+      const isLocal = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+      if (isLocal) {
         if (typeof window.gtag === 'function') {
-          window.gtag('event', 'generate_lead', {
-            form_name: 'intake',
-            method: 'dev-simulated'
-          });
+          window.gtag('event', 'generate_lead', { form_name: 'intake', method: 'dev-simulated' });
         }
         form.reset();
         location.hash = '#/thanks?form=intake&dev=1';
       } else {
-        throw new Error('Network response not ok');
+        if (status) status.textContent = 'Form endpoint not configured.';
+      }
+      return;
+    }
+
+    const headers = { 'Content-Type': 'application/json', 'Accept': 'application/json' };
+    if (cfg.AUTH_HEADER && cfg.AUTH_VALUE) headers[cfg.AUTH_HEADER] = cfg.AUTH_VALUE;
+    const payload = {
+      form: 'intake',
+      name, email, phone, company, website, industry, stage, team,
+      services,
+      software, transactions, challenges, goals, budget, timeline, referrer,
+      consent: !!consent,
+      source: location.href,
+      userAgent: navigator.userAgent,
+      timestamp: new Date().toISOString()
+    };
+    fetch(`${endpoint}/intake`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(payload)
+    }).then(async (resp) => {
+      if (resp.ok) {
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'generate_lead', { form_name: 'intake', method: 'custom' });
+        }
+        form.reset();
+        location.hash = '#/thanks?form=intake';
+      } else {
+        throw new Error(await resp.text().catch(() => 'Network response not ok'));
       }
     }).catch(() => {
       if (status) status.textContent = 'Sorry, something went wrong. Please email info@logicalbooks.com.';
